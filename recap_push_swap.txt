@@ -1,0 +1,169 @@
+Fonctions basiques :
+
+                * ft_stack_new : Créer un nouveau maillon dans une liste chainée.
+               
+                * ft_stack_size : Permet de connaitre la taille d'une liste chainée.
+               
+                * ft_stack_last : Renvoie le dernier maillon de la liste chainée.
+               
+                * ft_stack_add_front : Ajoute un nv maillon au debut debut de la liste.
+               
+                * ft_stack_add_back : Ajoute un nv maillon a la fin de la liste.
+               
+                * ft_stack_before_last : Renvoie l'avant dernier element de la liste.
+
+
+
+Les instructions de mouvements :
+
+                * sa (swap a) : Intervertit les 2 premiers nb de la pile a par ordre croissant.
+                * sb (swap b) : Intervertit les 2 premiers nb de la pile b par ordre croissant.
+                * ss : sa et sb en meme temps.
+
+
+                * pa (push a) : Prend le 1er nb au sommet de stack_b pour le mettre sur stack_a.
+                * pb (push b) : Prend le 1er nb au sommet de stack_a pour le mettre sur stack_b.
+
+
+                * ra (rotate a) : Le premier nb de stack_a devient le dernier de stack_a.
+                * rb (rotate b) : Le premier nb de stack_b devient le dernier de stack_b.
+                * rr : ra et rb en meme temps.
+
+
+                * rra (reverse rotate a) : Le dernier nb de stack_a devient le premier de stack_a.
+                * rrb (reverse rotate b) : Le dernier nb de stack_b devient le premier de stack_b.
+                * rrr : rra et rrb en meme temps.
+
+
+
+main.c ->   *     
+                - verif si il n'y a pas autre chose que des nb, des signes et whitespaces
+                - verif si after un signe c'est bien un digit et before bien un whitespace
+                - je split mes argv pour n'avoir que des entiers a trier
+                - je verif qu'il n'y est pas de doublon dans la liste
+                - je verif que laliste ne soit pas deja trier
+                - je call une ft pour le nb de mov pour 2, 3 et 5 nb
+                - je call la ft qui va trier toute ma stack
+                - je call la ft qui va clear ma stack
+
+
+
+Details des ft de verif :
+
+            * ft_verif_right_char : Je parcours mes argv et je verif que si il y a autre chose que
+                                    des digits, whitespaces et '-' & '+'. Si autre chose, Error\n.
+            
+            * ft_is_valid : Je parcours mes argv et je verif si avant un signe c'est bien un whitespace
+                            ou rien (c'est a dire qu'on ne soit pas a la pos 0), et qu'apres ce soit un digit,
+                            si ce n'est pas le cas, Error\n.
+            
+            * ft_parsing : Je parcours mes argv, je les split. Ensuite je check (ft_check_overflow) si le nb est valide, c a dire
+                           qui loge dans un int, si superieur a un int Error\n.
+                           Si nb valide, je peux ajouter le nb en tant que maillon de la chaine et ainsi de suite.
+
+            * ft_verif_double : Je parcours ma stack ; j'initialise 2 variables qui sont des maillons;
+                                - 'pos' etant le maillon de reference c a dire que c'est a lui (nb) que seront
+                                comparés les autres nb.
+                                - 'verif_all' etant le maillon qui va parcourir le reste de la liste a partir de pos->next.
+                                Donc si verif_all->content == pos->content cela signifie qu'il y a un doublon,
+                                donc return Error\n.
+
+            * ft_is_sort : Je parcours ma stack avec une temp, et tant que mon prochain et mon nb son plus
+                           petit que mon prochain nb, on continue.
+
+
+
+Cas spéciaux 2, 3 et 5 nb :
+
+            * : Pour 2 nb si c'est pas trier, ft_swap_a;
+            * : Pour 3 nb, 3 cas possible : - Si le max en premier, rotate puis si pas trier swap.
+                                            - Si le max au milieu, rra, si pas trier swap.
+                                            - Si le max en dernier, swap.
+            * : Pour 5 nb, j'envoie les 2 plus petits nb dans stack_b, je trie les 3 nb de stack_a
+                avec la fonction pour 3 nb, ensuite je renvoie mes nb avec ft_push_a, dans ma stack_a.
+                Cas possible : - Si min est pos 0, pb.
+                               - Si min est pos 1, sa puis pb.
+                               - Si min est pos 2, ra, sa puis pb.
+                               - Si min est pos 3, rra * 2 (sauf si pas de nb apres rra * 1), puis pb.
+                               - Si min est pos 4, rra puis pb.
+
+
+
+Fonctions de maths :
+            * ft_mediane : Va permettre de trouver la médiane en call ft_is_mediane en lui envoyant un maillon.
+           
+            * ft_is_mediane : Va chercher la médiane, grace a un cpt qui va soit augmenter, soit diminuer selon
+                              si le le content est + ou - élevé que le nb.
+           
+            * ft_quarter : Va permettre de trouver le quart de ce qu'on a deja decouper en 2 avec ft_is_quarter.
+           
+            * ft_is_quarter : Meme principe que ft_is_mediane, sauf que si le content est inferieur au nb,
+                              on soustrait de 3 le cpt car on veut etre sur qu'il y a 3 fois plus au dessus.
+           
+            * ft_find_max : Va permettre de trouver le max dans une liste. On dit qu'au depart le max = INT_MIN.
+                             Donc si notre max est inferieur a notre content, notre max va prendre la valeur de notre content,
+                            qui est notre nv max. pos = i car vu que i se balade donc on va lui dire que sa position vas etre egal
+                            a pos, qui sera return en fin de ft, pour qu'on puisse connaitre l'emplacement du min. 
+           
+            * ft_find_min : Va permettre de trouver le min dans une liste. On dit qu'au depart le min = INT_MAX.
+                            Donc si notre min est + grand que notre content, notre min va prendre la valeur de notre content,
+                            qui est notre nv min. pos = i car vu que i se balade donc on va lui dire que sa position vas etre egal
+                            a pos, qui sera return en fin de ft, pour qu'on puisse connaitre l'emplacement du min. 
+
+
+
+Details de l'algorithme :
+
+            * ft_sort_stack : Fonction principal de l'algo.
+                              - Va call ft_push_all pour tout push dans stack_b
+                              Ensuite tout se passe dans stack_b :
+                                - Va chercher le meilleur dans stack_b
+                                - On pa
+                                - Notre size_b diminue et notre size_a augmente
+                              Si et tant que notre liste n'est pas totalement trier on ra
+           
+            * ft_push_all : Le but etant de tout push dans stack_b. Donc tant que la taille de ma stack_a est superieure
+                            a 2, on fait appel a ft_div_stack pour diviser notre stack.
+                            Ensuite le reste qui reste dans stack_a on le pb.
+           
+            * ft_top_mov : Le but va etre de chercher le meilleur dans stack_b avec find_best_mov
+           
+            * find_best_m : Va chercher le meilleur dans b, va le mettre en haut.
+							- nb_mov_a va etre le nb de coup pour placer le nb dans stack_a
+							- cpt va etre la position du nb dans stack_b
+							- i_min_mov_a recherche le min de coup du nb pour qu'il soit bien placer dans stack_a 
+							- i_min_mov_b qui lui sera egal a la position du nb dans stack_b, si mon nb de coups actuel
+							est inferieur a mon minimum de coups dans stack_a + dans stack_b
+							Et quand il aura trouver le meilleur, il le mettra en haut de la pile de stack_b avec ft_bis_best_m.
+           
+            * ft_bis_best_m : 
+           
+            * ft_nb_of_mov : Pour savoir le meilleur nb de mouv a faire.
+                             - Si size - pos < pos ---> return size - pos
+                             - Sinon return pos.
+                    ex : size = 500; pos = 200;
+                        size - pos = 500 - 200 = 300
+                        300 < 200 ? NON donc on va return la pos car le chemin pour aller a 500 moins long en --;
+                        *
+                        size = 500; pos = 400;
+                        size - pos = 500 - 400 = 100
+                        100 < 400 ? OUI donc on va return size - pos car le chemin pour aller a 500 moins long en ++; 
+           
+            * ft_search_and_place : Va permettre de trouver la meilleur place du nb dans stack_b pour le placer au
+                                    mieux dans stack_a.
+                                    - Donc si notre nb est + grand que content et plus petit que next->content alors
+                                    on return i + 1 <- qui sera la pos a laquelle mettre le nb.
+            //                      - Si ?
+                                    - Si rien ne correspond, on return le min de stack_a.
+           
+            * ft_div_stack : Va permettre de diviser notre stack. Tant que la taille de notre stack est diff de notre taille de base / 2 :
+                             - on va rotate les nb superieurs a la mediane
+                             - sinon si ils sont plus petits que la mediane on les pb
+                                - ensuite si ces derniers sont superieurs au quart on les rb
+                             Tout en decrementant la size de stack_a. 
+
+
+
+Algorithme :
+
+            * 

@@ -1,23 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_uns_int.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: madumerg <madumerg@student.42angouleme.    +#+  +:+       +#+        */
+/*   By: madumerg <madumerg@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/30 14:07:38 by madumerg          #+#    #+#             */
-/*   Updated: 2024/02/29 09:31:48 by madumerg         ###   ########.fr       */
+/*   Created: 2023/11/17 13:18:12 by madumerg          #+#    #+#             */
+/*   Updated: 2023/11/28 12:16:03 by madumerg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-size_t	ft_strlen(const char *str)
+int	ft_putnbr_uns_int(unsigned int n)
 {
-	size_t	i;
+	unsigned int	i;
 
 	i = 0;
-	while (str && str[i])
-		i++;
+	if (n < 10)
+	{
+		i += ft_putchar(n + '0');
+		return (i);
+	}
+	else if (n >= 10)
+	{
+		i += ft_putnbr(n / 10);
+		i += ft_putnbr(n % 10);
+	}
 	return (i);
 }

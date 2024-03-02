@@ -6,7 +6,7 @@
 /*   By: madumerg <madumerg@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 12:08:34 by madumerg          #+#    #+#             */
-/*   Updated: 2024/02/18 18:44:55 by madumerg         ###   ########.fr       */
+/*   Updated: 2024/02/29 10:40:15 by madumerg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define PUSH_SWAP_H
 
 # include <stdlib.h>
-# include "Ft_Printf/ft_printf.h"
+# include "Libft/Ft_Printf/ft_printf.h"
 # include "Libft/libft.h"
 
 # define ERROR "Error"
@@ -51,8 +51,8 @@ void	ft_reverse_rotate_a(t_stack **stack_a);
 void	ft_reverse_rotate_b(t_stack **stack_b);
 void	ft_reverse_rotate(t_stack **stack_a, t_stack **stack_b);
 
-int		ft_mediane(t_stack **stack);
-int		ft_is_mediane(t_stack **stack, int nb);
+int		ft_median(t_stack **stack);
+int		ft_is_median(t_stack **stack, int nb);
 int		ft_quarter(t_stack **stack);
 int		ft_is_quarter(t_stack **stack, int nb);
 

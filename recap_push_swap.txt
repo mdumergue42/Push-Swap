@@ -126,7 +126,7 @@ Details de l'algorithme :
                             a 2, on fait appel a ft_div_stack pour diviser notre stack.
                             Ensuite le reste qui reste dans stack_a on le pb.
            
-            * ft_top_mov : Le but va etre de chercher le meilleur dans stack_b avec find_best_mov
+            * ft_top_mov : Le but va etre de chercher le meilleur dans stack_b avec find_best_m
            
             * find_best_m : Va chercher le meilleur dans b, va le mettre en haut.
 							- nb_mov_a va etre le nb de coup pour placer le nb dans stack_a
@@ -136,7 +136,7 @@ Details de l'algorithme :
 							est inferieur a mon minimum de coups dans stack_a + dans stack_b
 							Et quand il aura trouver le meilleur, il le mettra en haut de la pile de stack_b avec ft_bis_best_m.
            
-            * ft_bis_best_m : 
+            * ft_bis_best_m : chercher le meilleur coup pour un nombre.
            
             * ft_nb_of_mov : Pour savoir le meilleur nb de mouv a faire.
                              - Si size - pos < pos ---> return size - pos

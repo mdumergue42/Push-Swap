@@ -33,7 +33,11 @@ SRCS    = ft_isalpha.c \
 			ft_strmapi.c \
 			ft_split.c \
 			ft_atoll.c \
-			ft_is_space.c
+			ft_is_space.c \
+			Ft_Printf/ft_printf_utils.c \
+			Ft_Printf/ft_printf.c \
+			Ft_Printf/ft_putnbr_hexa.c \
+			Ft_Printf/ft_putnbr_uns_int.c
 
 NAME    = libft.a
 

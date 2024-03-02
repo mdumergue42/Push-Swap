@@ -6,7 +6,7 @@
 /*   By: madumerg <madumerg@student.42angouleme.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 12:06:08 by madumerg          #+#    #+#             */
-/*   Updated: 2024/02/19 13:46:33 by madumerg         ###   ########.fr       */
+/*   Updated: 2024/02/29 09:36:17 by madumerg         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_div_stack(t_stack **stack_a, t_stack **stack_b, int size_a)
 	int	size_base;
 	int	quarter;
 
-	val = ft_mediane(stack_a);
+	val = ft_median(stack_a);
 	size_a = ft_stack_size(*stack_a);
 	quarter = ft_quarter(stack_a);
 	size_base = size_a;
@@ -97,13 +97,9 @@ void	ft_push_all(t_stack **stack_a, t_stack **stack_b)
 
 	size_a = ft_stack_size(*stack_a);
 	while (size_a > 2)
-	{
 		size_a = ft_div_stack(stack_a, stack_b, size_a);
-	}
 	while (stack_a && *stack_a != NULL)
-	{
 		ft_push_b(stack_a, stack_b);
-	}
 }
 
 void	ft_sort_stack(t_stack **stack, t_stack **stack_b)
